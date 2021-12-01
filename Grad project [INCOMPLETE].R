@@ -2,6 +2,9 @@ library(readxl)
 library(dplyr)
 library(plyr)
 library(tidyr)
+library(ggplot2)
+library(colorspace)
+library(ggpubr)
 setwd("C:/Users/Friend Computer/Desktop/e6_intro2R/R graduate project")
 list.files()
 A=read_xlsx("Values for R project.xlsx")
@@ -59,4 +62,30 @@ K.pnu4
 if_else(condition=K.pnu2>0.1168,true="yes",false="no")
 #in fact, the vast majority of absorbance values were under the average of the negative control
 ###this was an unsuccessful experiment! We can still plot it and do data analysis on it though
+K.plot=K.pnu3
+K.plot2=K.stats
+K.plot2=K.plot2[-c(1,12),]
+K.plot2$glu.mg.dl=c(0,40,80,120,160,200,240,280,320,360)
+K.plot2
+K.plot
+ggplot(data=K.plot2,aes(x=glu.mg.dl,y=average))+
+  geom_point()+
+  geom_line()+
+  geom_smooth(method="lm")
+ggplot(data=K.plot,aes(x=absorbance,))+
+  geom_histogram()+
+  facet_grid(.~group)
+hist(x=K.plot2$average)
+ggqqplot(K.plot2$average)
+model.avg=aov(formula=average~glu.mg.dl,data=K.plot2)
+model.avg
+summary(model.avg)
+model.stdev=aov(formula=stdev~glu.mg.dl,data=K.plot2)
+model.stdev
+summary(model.stdev)
+model.absorb=aov(formula=absorbance~group,data=K.plot)
+model.absorb
+summary(model.absorb)
+  
 
+  
