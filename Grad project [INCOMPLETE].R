@@ -77,6 +77,7 @@ ggplot(data=K.plot,aes(x=absorbance,))+
   facet_grid(.~group)
 hist(x=K.plot2$average)
 ggqqplot(K.plot2$average)
+#as expected, my data isn't significant, let's go further though
 model.avg=aov(formula=average~glu.mg.dl,data=K.plot2)
 model.avg
 summary(model.avg)
@@ -86,6 +87,18 @@ summary(model.stdev)
 model.absorb=aov(formula=absorbance~group,data=K.plot)
 model.absorb
 summary(model.absorb)
-  
+model.stdev.lm=lm(formula=stdev~glu.mg.dl,data=K.plot2)
+model.stdev.lm
+summary(model.stdev.lm)
+TukeyHSD(model.absorb)
+model.stdev.poly=lm(formula=stdev~poly(x=glu.mg.dl,degree=2),data=K.plot2)
+model.stdev.poly
+plot(model.stdev.lm)
+plot(model.stdev.poly)
+comparison=anova(model.stdev.poly,model.stdev.lm)
+comparison
+#no significant difference between two models
+##Let's save and export some data and graphs
+save.image(file="R grad project data set.Rdata")
 
   
