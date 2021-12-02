@@ -9,6 +9,7 @@ library(writexl)
 setwd("C:/Users/Friend Computer/Desktop/e6_intro2R/R graduate project")
 list.files()
 A=read_xlsx("Values for R project.xlsx")
+A
 #experiment conducted only used wells in rows A through E
 Asub=A[1:5,]
 head(Asub)
@@ -16,17 +17,22 @@ colnames(Asub)=c("placeholder","Urine.only","0mg/dl","40mg/dl","80mg/dl","120mg/
                                    "160mg/dl","200mg/dl","240mg/dl","280mg/dl","320mg/dl","360mg/dl",
                                    "Empty.well")
 Asub2=Asub[,-1]
+Asub2=as.data.frame(Asub2)
 Asub2
 Asub3=Asub2
 Asub2
 K.pnu=as.data.frame(Asub2)
 rownames(K.pnu)=c("A","B","C","D","E")
 summary(K.pnu)
+K.pnu
 #I'd like to reorder each of these columns from greatest values to least values, I'm going to do one column manually,
 ##write a custom function for the next, and use a for loop to run that function across the rest of the columns
 Urine.only=Asub2[,1]
 Urine.only
-Urine.only2=arrange(.data=Urine.only, desc(Urine.only))
+Urine.only2=sort(x=Urine.only,decreasing=TRUE)
+Urine.only2=as.data.frame(Urine.only2)
+Urine.only2
+colnames(Urine.only2)="Urine.only"
 Asub3$Urine.only=Urine.only2$Urine.only
 Asub3
 
