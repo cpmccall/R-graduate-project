@@ -9,6 +9,7 @@ library(writexl)
 setwd("C:/Users/Friend Computer/Desktop/e6_intro2R/R graduate project")
 list.files()
 A=read_xlsx("Values for R project.xlsx")
+A
 #experiment conducted only used wells in rows A through E
 Asub=A[1:5,]
 head(Asub)
@@ -17,6 +18,7 @@ colnames(Asub)=c("placeholder","Urine.only","0mg/dl","40mg/dl","80mg/dl","120mg/
                                    "Empty.well")
 Asub2=Asub[,-1]
 Asub2
+Asub2=as.data.frame(Asub2)
 Asub3=Asub2
 Asub2
 K.pnu=as.data.frame(Asub2)
@@ -107,3 +109,4 @@ write_xlsx(K.pnu,"K.pnu.xlsx")
 ggsave("lines.png")
 #this saves the plot and exports it as a .png file, it defaults to the last plot viewed
 ##but if you assign a plot to an object, you can tell it to save that object
+#https://github.com/cpmccall/R-graduate-project

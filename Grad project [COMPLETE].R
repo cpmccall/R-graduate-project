@@ -42,6 +42,7 @@ names(sorted.df) <- names(Asub3)
 Asub3 <- as.data.frame(Asub3)
 for(i in 1:length(Asub3)){values <- as.vector(Asub3[,i]);sorted.df[,i] <- sort(values, decreasing=T)}
 K.pnu=sorted.df
+K.pnu
 #What is the average absorbance value for each column?
 K.averages=apply(X=K.pnu,MARGIN=2,FUN=mean)
 #what is the standard deviation?
@@ -113,3 +114,4 @@ write_xlsx(K.pnu,"K.pnu.xlsx")
 ggsave("lines.png")
 #this saves the plot and exports it as a .png file, it defaults to the last plot viewed
 ##but if you assign a plot to an object, you can tell it to save that object
+#https://github.com/cpmccall/R-graduate-project
